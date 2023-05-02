@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>{{ post.title }}</h2>
+<p>{{ post.content|linebreaks }}</p>
+<p>{{ post.user }}, {{ post.time_create }}</p>
+<br>
+
+{% if request.user.is_authenticated %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">ok</button>
+</form>
+{% else %}
+<p>Авторизуйтесь, чтобы оставить комментарий</p>
+{% endif %}
+
+{% if comments %}
+{% for comment in comments %}
+<li>
+    <p>{{ comment.comment }}</p>
+    <p>{{ comment.user }}, {{ comment.time_create }}</p>
+    <br>
+</li>
+{% endfor %}
+{% else %}
+    <p>Комментариев к данному посту нет...</p>
+{% endif %}
+
+{% endblock %}

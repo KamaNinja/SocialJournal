@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="POST">
+
+<a href="{% url 'like' %}"><button>like</button></a>
+
+<form action="" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    <input type="text" name="username">
     <button type="submit">ok</button>
 </form>
+
 {% endblock %}
